@@ -1,0 +1,21 @@
+{
+    "nav": {
+        "home": "Home",
+        "about": "About Us",
+        "courses": "Courses",
+        "enroll": "Enroll Now",
+        "contact": "Contact",
+        "faq": "FAQ"
+    },
+    "hero": {
+        "title": "Master Mobile Repair Technology",
+        "subtitle": "Join Global Knowledge International Training Institute and build a future-proof career.",
+        "cta": "Start Your Journey"
+    },
+    "footer": {
+        "rights": "All rights reserved.",
+        "privacy": "Privacy Policy",
+        "terms": "Terms & Conditions",
+        "developedBy": "Developed by Techfix Softwares Ltd"
+    }
+}

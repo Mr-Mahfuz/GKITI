@@ -4,7 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "dependencies": {
-    "vue": "^3.5.24"
+    "@tailwindcss/vite": "^4.1.18",
+    "aos": "^2.3.4",
+    "lucide-vue-next": "^0.561.0",
+    "pinia": "^3.0.4",
+    "vue": "^3.5.24",
+    "vue-i18n": "^11.2.2",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
@@ -14,9 +20,9 @@
     "vite": "^7.2.2"
   },
   "scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "preview": "vite preview",
-  "tailwind:init": "tailwindcss init -p"
-}
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tailwind:init": "tailwindcss init -p"
+  }
 }
