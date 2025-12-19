@@ -4,13 +4,35 @@
         "about": "About Us",
         "courses": "Courses",
         "enroll": "Enroll Now",
+        "blog": "Blogs",
         "contact": "Contact",
         "faq": "FAQ"
     },
     "hero": {
+        "badge": "Future-Proof Your Career",
         "title": "Master Mobile Repair Technology",
-        "subtitle": "Join Global Knowledge International Training Institute and build a future-proof career.",
-        "cta": "Start Your Journey"
+        "headline_part1": "Become a",
+        "headline_part2": "Mobile Repair Technician",
+        "description": "Join GKITI to decode hardware secrets and software mastery. Certified training for the next gen of technicians.",
+        "cta": "Start Your Journey",
+        "secondary_cta": "Explore Courses"
+    },
+    "features": {
+        "bteb": "BTEB Certified",
+        "practical_labs": "100% Practical Labs",
+        "hardware_title": "Advanced Hardware",
+        "hardware_desc": "Level 4 repair training covering micro-soldering, double-decker CPU reballing, and schematic analysis.",
+        "software_title": "Software Unlocking",
+        "software_desc": "Master modern security protocols. iCloud bypass, FRP unlock, and EMMC programming mastery.",
+        "certification_title": "BTEB Certification",
+        "certification_desc": "We provide BTEB certification recognized internationally. Bangladesh Technical Education Board."
+    },
+    "enrollment": {
+        "cta": "Enroll in This Batch"
+    },
+    "why_gkiti": {
+        "title": "Why GKITI?",
+        "description": "Elite infrastructure met with cutting-edge curriculum. We don't just teach repair; we engineer careers."
     },
     "footer": {
         "rights": "All rights reserved.",

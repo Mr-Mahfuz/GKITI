@@ -28,7 +28,7 @@ const currentYear = new Date().getFullYear()
                         certification.
                     </p>
                     <div class="flex gap-4">
-                        <a href="#"
+                        <a href="https://www.facebook.com/globalknowledgebd" target="_blank" rel="noopener noreferrer"
                             class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-neon-blue hover:text-tech-bg hover:shadow-[0_0_15px_#06b6d466] transition-all duration-300 border border-white/5 hover:border-neon-blue">
                             <Facebook class="w-5 h-5" />
                         </a>
