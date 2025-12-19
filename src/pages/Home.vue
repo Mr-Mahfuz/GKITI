@@ -1,5 +1,6 @@
 <script setup>
 import { CheckCircle, ShieldCheck, Award, Smartphone, Cpu, Zap } from 'lucide-vue-next'
+import gkitiBanner from '../assets/gkiti-training.jpg'
 </script>
 
 <template>
@@ -30,20 +31,19 @@ import { CheckCircle, ShieldCheck, Award, Smartphone, Cpu, Zap } from 'lucide-vu
                                     class="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-blue opacity-75"></span>
                                 <span class="relative inline-flex rounded-full h-2 w-2 bg-neon-blue"></span>
                             </span>
-                            Future-Proof Your Career
+                            {{ $t('hero.badge') }}
                         </div>
 
                         <h1 class="text-6xl lg:text-8xl font-black text-white leading-tight mb-8 tracking-tight">
-                            Master <br>
+                            {{ $t('hero.headline_part1') }} <br>
                             <span
-                                class="text-transparent bg-clip-text bg-linear-to-r from-neon-blue via-neon-purple to-neon-pink animate-pulse-slow">Mobile
-                                Tech</span>
+                                class="text-transparent bg-clip-text bg-linear-to-r from-neon-blue via-neon-purple to-neon-pink animate-pulse-slow">{{
+                                    $t('hero.headline_part2') }}</span>
                         </h1>
 
                         <p
                             class="text-xl text-text-secondary mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-light">
-                            Join <span class="text-white font-semibold">GKITI</span> to decode hardware secrets and
-                            software mastery. Certified training for the next gen of technicians.
+                            {{ $t('hero.description') }}
                         </p>
 
                         <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
@@ -56,17 +56,17 @@ import { CheckCircle, ShieldCheck, Award, Smartphone, Cpu, Zap } from 'lucide-vu
                             </router-link>
                             <router-link to="/about"
                                 class="px-8 py-4 bg-transparent text-white border border-white/20 rounded-xl font-bold text-lg hover:bg-white/5 hover:border-neon-purple/50 hover:text-neon-purple hover:shadow-[0_0_20px_#8b5cf64d] transition-all duration-300">
-                                Explore Courses
+                                {{ $t('hero.secondary_cta') }}
                             </router-link>
                         </div>
 
                         <div
                             class="mt-12 flex flex-wrap items-center justify-center lg:justify-start gap-8 text-text-secondary text-sm font-medium">
                             <div class="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-lg border border-white/5">
-                                <CheckCircle class="w-5 h-5 text-neon-blue" /> ISO Certified
+                                <CheckCircle class="w-5 h-5 text-neon-blue" /> {{ $t('features.bteb') }}
                             </div>
                             <div class="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-lg border border-white/5">
-                                <CheckCircle class="w-5 h-5 text-neon-purple" /> 100% Practical Labs
+                                <CheckCircle class="w-5 h-5 text-neon-purple" /> {{ $t('features.practical_labs') }}
                             </div>
                         </div>
                     </div>
@@ -82,12 +82,12 @@ import { CheckCircle, ShieldCheck, Award, Smartphone, Cpu, Zap } from 'lucide-vu
 
                             <div class="aspect-video bg-black rounded-2xl overflow-hidden relative">
                                 <!-- GKITI Banner Image -->
-                                <div
-                                    class="absolute inset-0 bg-[url('../assets/gkiti-banner.jpg')] bg-cover bg-center opacity-80 hover:scale-110 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-cover bg-center opacity-80 hover:scale-110 transition-transform duration-700"
+                                    :style="{ backgroundImage: 'url(' + gkitiBanner + ')' }">
                                 </div>
 
                                 <div
-                                    class="absolute bottom-6 left-6 right-6 bg-black/80 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-lg">
+                                    class="absolute top-6 left-6 right-6 bg-black/80 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-lg">
                                     <div class="flex items-center justify-between">
                                         <div>
                                             <p class="text-xs text-neon-blue font-bold uppercase tracking-[0.2em] mb-1">
@@ -129,17 +129,22 @@ import { CheckCircle, ShieldCheck, Award, Smartphone, Cpu, Zap } from 'lucide-vu
         <!-- Featured Enrollment Poster Section -->
         <section class="py-10 container mx-auto px-4 z-10 relative" data-aos="fade-up">
             <div
-                class="bg-gray-100 p-20 rounded-xl overflow-hidden shadow-[0_0_40px_#8b5cf633] border border-white/10 group">
+                class="bg-white/5 backdrop-blur-sm p-4 md:p-8 rounded-2xl border border-white/10 shadow-[0_0_40px_rgba(139,92,246,0.1)] group max-w-5xl mx-auto">
                 <div
-                    class="max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl transform group-hover:scale-[1.01] transition duration-500">
+                    class="relative rounded-xl overflow-hidden shadow-2xl transition duration-500 group-hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]">
                     <img src="../assets/enrollment-poster.png" alt="Current Enrollment"
-                        class="w-full h-auto object-cover" />
+                        class="w-full h-auto object-cover transform group-hover:scale-[1.01] transition duration-700" />
+
+                    <!-- Gradient overlay on bottom for better text readability if needed, or just visual polish -->
+                    <div
+                        class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    </div>
                 </div>
 
-                <div class="text-center mt-10">
+                <div class="text-center mt-8 mb-4">
                     <router-link to="/enroll"
-                        class="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-neon-blue to-neon-purple text-white font-bold text-lg rounded-xl hover:shadow-[0_0_25px_#06b6d466] hover:-translate-y-1 transition-all">
-                        <Zap class="w-5 h-5" /> Enroll in This Batch
+                        class="inline-flex items-center gap-2 px-10 py-4 bg-linear-to-r from-neon-blue to-neon-purple text-white font-bold text-lg rounded-xl hover:shadow-[0_0_25px_#06b6d466] hover:-translate-y-1 transition-all border border-white/20">
+                        <Zap class="w-5 h-5" /> {{ $t('enrollment.cta') }}
                     </router-link>
                 </div>
             </div>
@@ -153,9 +158,8 @@ import { CheckCircle, ShieldCheck, Award, Smartphone, Cpu, Zap } from 'lucide-vu
 
             <div class="container mx-auto px-4 relative z-10">
                 <div class="text-center max-w-3xl mx-auto mb-20" data-aos="fade-up">
-                    <h2 class="text-4xl font-black text-white mb-6">Why <span class="text-gradient">GKITI?</span></h2>
-                    <p class="text-text-secondary text-lg">Elite infrastructure met with cutting-edge curriculum. We
-                        don't just teach repair; we engineer careers.</p>
+                    <h2 class="text-4xl font-black text-white mb-6">{{ $t('why_gkiti.title') }}</h2>
+                    <p class="text-text-secondary text-lg">{{ $t('why_gkiti.description') }}</p>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-8">
@@ -171,9 +175,9 @@ import { CheckCircle, ShieldCheck, Award, Smartphone, Cpu, Zap } from 'lucide-vu
                             <Cpu class="w-8 h-8 text-neon-blue" />
                         </div>
                         <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-neon-blue transition-colors">
-                            Advanced Hardware</h3>
-                        <p class="text-text-secondary leading-relaxed group-hover:text-gray-300">Level 4 repair training
-                            covering micro-soldering, double-decker CPU reballing, and schematic analysis.</p>
+                            {{ $t('features.hardware_title') }}</h3>
+                        <p class="text-text-secondary leading-relaxed group-hover:text-gray-300">{{
+                            $t('features.hardware_desc') }}</p>
                     </div>
 
                     <!-- Feature 2 -->
@@ -188,9 +192,9 @@ import { CheckCircle, ShieldCheck, Award, Smartphone, Cpu, Zap } from 'lucide-vu
                             <ShieldCheck class="w-8 h-8 text-neon-purple" />
                         </div>
                         <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-neon-purple transition-colors">
-                            Software Unlocking</h3>
-                        <p class="text-text-secondary leading-relaxed group-hover:text-gray-300">Master modern security
-                            protocols. iCloud bypass, FRP unlock, and EMMC programming mastery.</p>
+                            {{ $t('features.software_title') }}</h3>
+                        <p class="text-text-secondary leading-relaxed group-hover:text-gray-300">{{
+                            $t('features.software_desc') }}</p>
                     </div>
 
                     <!-- Feature 3 -->
@@ -205,9 +209,9 @@ import { CheckCircle, ShieldCheck, Award, Smartphone, Cpu, Zap } from 'lucide-vu
                             <Award class="w-8 h-8 text-neon-pink" />
                         </div>
                         <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-neon-pink transition-colors">
-                            Global Certification</h3>
-                        <p class="text-text-secondary leading-relaxed group-hover:text-gray-300">Get certified and
-                            placed. We provide ISO 9001:2015 certificates accepted in 150+ countries.</p>
+                            {{ $t('features.certification_title') }}</h3>
+                        <p class="text-text-secondary leading-relaxed group-hover:text-gray-300">{{
+                            $t('features.certification_desc') }}</p>
                     </div>
                 </div>
             </div>

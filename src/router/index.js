@@ -23,6 +23,11 @@ const routes = [
         component: () => import('../pages/Enroll.vue')
     },
     {
+        path: '/blogs',
+        name: 'Blogs',
+        component: () => import('../pages/Blogs.vue')
+    },
+    {
         path: '/faq',
         name: 'FAQ',
         component: () => import('../pages/FAQ.vue')

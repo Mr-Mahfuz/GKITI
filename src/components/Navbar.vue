@@ -34,23 +34,31 @@ onUnmounted(() => {
                     class="w-12 h-12 object-contain drop-shadow-[0_0_10px_#06b6d499] group-hover:drop-shadow-[0_0_15px_#06b6d4cc] transition-all duration-300" />
                 <span
                     class="font-bold text-xl tracking-tight hidden sm:block text-text-primary group-hover:text-neon-blue transition-colors">
-                    GKITI
+                    Global Knowledge
                 </span>
             </router-link>
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center gap-8">
                 <router-link to="/"
-                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all">{{
+                    active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
+                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">{{
                         t('nav.home') }}</router-link>
                 <router-link to="/about"
-                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all">{{
+                    active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
+                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">{{
                         t('nav.courses') }}</router-link>
                 <router-link to="/enroll"
-                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all">{{
+                    active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
+                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">{{
                         t('nav.enroll') }}</router-link>
+                <router-link to="/blogs"
+                    active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
+                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">{{
+                        t('nav.blog') }}</router-link>
                 <router-link to="/contact"
-                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all">{{
+                    active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
+                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">{{
                         t('nav.contact') }}</router-link>
             </div>
 
@@ -81,14 +89,19 @@ onUnmounted(() => {
         <!-- Mobile Menu -->
         <div v-if="isMenuOpen"
             class="md:hidden absolute top-full left-0 w-full bg-tech-bg/95 backdrop-blur-xl border-t border-neon-blue/20 shadow-2xl p-4 flex flex-col gap-4">
-            <router-link to="/" class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{
-                t('nav.home') }}</router-link>
-            <router-link to="/about" class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{
-                t('nav.courses') }}</router-link>
-            <router-link to="/enroll"
+            <router-link to="/" active-class="text-neon-blue bg-white/10"
+                class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{
+                    t('nav.home') }}</router-link>
+            <router-link to="/about" active-class="text-neon-blue bg-white/10"
+                class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{
+                    t('nav.courses') }}</router-link>
+            <router-link to="/enroll" active-class="text-neon-blue bg-white/10"
                 class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{ t('nav.enroll')
                 }}</router-link>
-            <router-link to="/contact"
+            <router-link to="/blogs" active-class="text-neon-blue bg-white/10"
+                class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{ t('nav.blog')
+                }}</router-link>
+            <router-link to="/contact" active-class="text-neon-blue bg-white/10"
                 class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{ t('nav.contact')
                 }}</router-link>
             <div class="h-px bg-white/10 my-2"></div>
