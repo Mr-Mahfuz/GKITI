@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-tech-bg text-white pt-32 pb-20">
+    <div class="min-h-screen text-white pt-32 pb-20">
         <div class="container mx-auto px-4">
             <h1 class="text-4xl lg:text-5xl font-black text-center mb-16 text-white" data-aos="fade-down">
                 Latest from <span class="text-gradient">Our Blog</span>
