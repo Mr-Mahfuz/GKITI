@@ -1,8 +1,25 @@
 <script setup>
 import { ref } from 'vue'
+import { useAuthStore } from '../stores/auth'
+import { useToastStore } from '../stores/toast'
+import { useRouter } from 'vue-router'
 
+const authStore = useAuthStore()
+const toast = useToastStore()
+const router = useRouter()
 const email = ref('')
 const password = ref('')
+
+const handleSignIn = async () => {
+    try {
+        const { error } = await authStore.signIn(email.value, password.value)
+        if (error) throw error
+        toast.success('Welcome back!')
+        // Redirect handled in store
+    } catch (error) {
+        toast.error(error.message)
+    }
+}
 </script>
 
 <template>
@@ -27,17 +44,18 @@ const password = ref('')
                 <p class="text-text-secondary">Sign in to access your course dashboard</p>
             </div>
 
-            <form class="space-y-6">
+            <form @submit.prevent="handleSignIn" class="space-y-6">
+                
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
-                    <input v-model="email" type="email"
+                    <input v-model="email" type="email" required
                         class="w-full bg-tech-bg/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-neon-blue focus:ring-1 focus:ring-neon-blue shadow-inner outline-none transition placeholder-gray-600"
                         placeholder="student@gkiti.com">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-2">Password</label>
-                    <input v-model="password" type="password"
+                    <input v-model="password" type="password" required
                         class="w-full bg-tech-bg/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-neon-purple focus:ring-1 focus:ring-neon-purple shadow-inner outline-none transition placeholder-gray-600"
                         placeholder="••••••••">
                 </div>
@@ -53,9 +71,9 @@ const password = ref('')
                         Password?</a>
                 </div>
 
-                <button
-                    class="w-full py-4 rounded-xl bg-linear-to-r from-neon-blue to-neon-purple text-white font-bold text-lg hover:shadow-[0_0_25px_#06b6d466] hover:-translate-y-0.5 transition-all duration-300 border border-white/10">
-                    Sign In to Dashboard
+                <button type="submit" :disabled="authStore.loading"
+                    class="w-full py-4 rounded-xl bg-linear-to-r from-neon-blue to-neon-purple text-white font-bold text-lg hover:shadow-[0_0_25px_#06b6d466] hover:-translate-y-0.5 transition-all duration-300 border border-white/10 disabled:opacity-50 disabled:cursor-not-allowed">
+                    {{ authStore.loading ? 'Signing In...' : 'Sign In to Dashboard' }}
                 </button>
             </form>
 

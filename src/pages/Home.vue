@@ -54,7 +54,7 @@ import gkitiBanner from '../assets/gkiti-training.jpg'
                                 </div>
                                 <span class="relative z-10">{{ $t('hero.cta') }}</span>
                             </router-link>
-                            <router-link to="/about"
+                            <router-link to="/courses"
                                 class="px-8 py-4 bg-transparent text-white border border-white/20 rounded-xl font-bold text-lg hover:bg-white/5 hover:border-neon-purple/50 hover:text-neon-purple hover:shadow-[0_0_20px_#8b5cf64d] transition-all duration-300">
                                 {{ $t('hero.secondary_cta') }}
                             </router-link>

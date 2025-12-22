@@ -1,8 +1,10 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { ref, onMounted, onUnmounted } from 'vue'
-import { Menu, X, Globe, User } from 'lucide-vue-next'
+import { Menu, X, Globe, User, LayoutDashboard } from 'lucide-vue-next'
+import { useAuthStore } from '../stores/auth'
 
+const authStore = useAuthStore()
 const { t, locale } = useI18n()
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
@@ -15,8 +17,12 @@ const checkScroll = () => {
     isScrolled.value = window.scrollY > 20
 }
 
-onMounted(() => {
+onMounted(async () => {
     window.addEventListener('scroll', checkScroll)
+    // Initialize auth store to check session
+    if (!authStore.user) {
+        await authStore.init()
+    }
 })
 
 onUnmounted(() => {
@@ -47,6 +53,10 @@ onUnmounted(() => {
                 <router-link to="/about"
                     active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
                     class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">{{
+                        t('nav.about') }}</router-link>
+                <router-link to="/courses"
+                    active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
+                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">{{
                         t('nav.courses') }}</router-link>
                 <router-link to="/enroll"
                     active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
@@ -69,14 +79,23 @@ onUnmounted(() => {
                     <Globe class="w-4 h-4" />
                     <span>{{ locale === 'en' ? 'BN' : 'EN' }}</span>
                 </button>
-                <router-link to="/signup"
-                    class="text-text-secondary font-medium text-sm hover:text-neon-blue px-4 py-2 transition hover:drop-shadow-[0_0_5px_#06b6d480]">
-                    Sign Up
-                </router-link>
-                <router-link to="/login"
-                    class="bg-linear-to-r from-neon-blue to-neon-purple text-white px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-[0_0_20px_#8b5cf680] hover:scale-105 transition-all duration-300 flex items-center gap-2 border border-white/20">
-                    <User class="w-4 h-4" /> Sign In
-                </router-link>
+                
+                <template v-if="!authStore.user">
+                    <router-link to="/signup"
+                        class="text-text-secondary font-medium text-sm hover:text-neon-blue px-4 py-2 transition hover:drop-shadow-[0_0_5px_#06b6d480]">
+                        Sign Up
+                    </router-link>
+                    <router-link to="/login"
+                        class="bg-linear-to-r from-neon-blue to-neon-purple text-white px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-[0_0_20px_#8b5cf680] hover:scale-105 transition-all duration-300 flex items-center gap-2 border border-white/20">
+                        <User class="w-4 h-4" /> Sign In
+                    </router-link>
+                </template>
+                <template v-else>
+                     <router-link to="/dashboard"
+                        class="bg-linear-to-r from-neon-blue to-neon-purple text-white px-6 py-2.5 rounded-full font-bold text-sm hover:shadow-[0_0_20px_#8b5cf680] hover:scale-105 transition-all duration-300 flex items-center gap-2 border border-white/20">
+                        <LayoutDashboard class="w-4 h-4" /> Dashboard
+                    </router-link>
+                </template>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -94,6 +113,9 @@ onUnmounted(() => {
                     t('nav.home') }}</router-link>
             <router-link to="/about" active-class="text-neon-blue bg-white/10"
                 class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{
+                    t('nav.about') }}</router-link>
+            <router-link to="/courses" active-class="text-neon-blue bg-white/10"
+                class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{
                     t('nav.courses') }}</router-link>
             <router-link to="/enroll" active-class="text-neon-blue bg-white/10"
                 class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{ t('nav.enroll')
@@ -108,10 +130,19 @@ onUnmounted(() => {
             <button @click="toggleLanguage" class="flex items-center gap-2 p-2 text-text-secondary hover:text-white">
                 <Globe class="w-4 h-4" /> {{ locale === 'en' ? 'Switch to Bengali' : 'Switch to English' }}
             </button>
-            <router-link to="/login"
-                class="bg-linear-to-r from-neon-blue to-neon-purple text-white w-full py-3 rounded-xl font-bold text-center block shadow-[0_0_15px_#06b6d44d]">
-                Sign In
-            </router-link>
+
+            <template v-if="!authStore.user">
+                <router-link to="/login"
+                    class="bg-linear-to-r from-neon-blue to-neon-purple text-white w-full py-3 rounded-xl font-bold text-center block shadow-[0_0_15px_#06b6d44d]">
+                    Sign In
+                </router-link>
+            </template>
+            <template v-else>
+                 <router-link to="/dashboard"
+                    class="bg-linear-to-r from-neon-blue to-neon-purple text-white w-full py-3 rounded-xl font-bold text-center block shadow-[0_0_15px_#06b6d44d] flex items-center justify-center gap-2">
+                    <LayoutDashboard class="w-4 h-4" /> Dashboard
+                </router-link>
+            </template>
         </div>
     </nav>
 </template>
