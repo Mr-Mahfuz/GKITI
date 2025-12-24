@@ -1,13 +1,40 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { ref, onMounted, onUnmounted } from 'vue'
-import { Menu, X, Globe, User, LayoutDashboard } from 'lucide-vue-next'
+import { Menu, X, Globe, User, LayoutDashboard, BookOpen, Settings, LogOut } from 'lucide-vue-next'
 import { useAuthStore } from '../stores/auth'
+
+import { computed } from 'vue'
 
 const authStore = useAuthStore()
 const { t, locale } = useI18n()
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
+
+const guestLinks = [
+    { to: '/', label: 'nav.home' },
+    { to: '/about', label: 'nav.about' },
+    { to: '/courses', label: 'nav.courses' },
+    { to: '/enroll', label: 'nav.enroll' },
+    { to: '/blogs', label: 'nav.blog' },
+    { to: '/contact', label: 'nav.contact' }
+]
+
+const studentLinks = [
+    { to: '/', label: 'nav.home' },
+    { to: '/dashboard', label: 'Dashboard' },
+]
+
+const adminLinks = [
+    { to: '/admin', label: 'Dashboard' },
+    { to: '/admin/courses', label: 'Manage Courses' },
+    // { to: '/admin/students', label: 'Students' }, // Future
+]
+
+const currentLinks = computed(() => {
+    if (!authStore.user) return guestLinks
+    return authStore.isAdmin ? adminLinks : studentLinks
+})
 
 const toggleLanguage = () => {
     locale.value = locale.value === 'en' ? 'bn' : 'en'
@@ -19,7 +46,6 @@ const checkScroll = () => {
 
 onMounted(async () => {
     window.addEventListener('scroll', checkScroll)
-    // Initialize auth store to check session
     if (!authStore.user) {
         await authStore.init()
     }
@@ -46,30 +72,11 @@ onUnmounted(() => {
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center gap-8">
-                <router-link to="/"
+                <router-link v-for="link in currentLinks" :key="link.to" :to="link.to"
                     active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
-                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">{{
-                        t('nav.home') }}</router-link>
-                <router-link to="/about"
-                    active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
-                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">{{
-                        t('nav.about') }}</router-link>
-                <router-link to="/courses"
-                    active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
-                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">{{
-                        t('nav.courses') }}</router-link>
-                <router-link to="/enroll"
-                    active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
-                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">{{
-                        t('nav.enroll') }}</router-link>
-                <router-link to="/blogs"
-                    active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
-                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">{{
-                        t('nav.blog') }}</router-link>
-                <router-link to="/contact"
-                    active-class="text-neon-blue border-b-2 border-neon-blue drop-shadow-[0_0_8px_#06b6d4]"
-                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">{{
-                        t('nav.contact') }}</router-link>
+                    class="text-sm font-medium text-text-secondary hover:text-neon-blue hover:drop-shadow-[0_0_5px_#06b6d480] transition-all py-1">
+                    {{ link.label.startsWith('nav.') ? t(link.label) : link.label }}
+                </router-link>
             </div>
 
             <!-- Action Buttons -->
@@ -108,25 +115,15 @@ onUnmounted(() => {
         <!-- Mobile Menu -->
         <div v-if="isMenuOpen"
             class="md:hidden absolute top-full left-0 w-full bg-tech-bg/95 backdrop-blur-xl border-t border-neon-blue/20 shadow-2xl p-4 flex flex-col gap-4">
-            <router-link to="/" active-class="text-neon-blue bg-white/10"
-                class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{
-                    t('nav.home') }}</router-link>
-            <router-link to="/about" active-class="text-neon-blue bg-white/10"
-                class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{
-                    t('nav.about') }}</router-link>
-            <router-link to="/courses" active-class="text-neon-blue bg-white/10"
-                class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{
-                    t('nav.courses') }}</router-link>
-            <router-link to="/enroll" active-class="text-neon-blue bg-white/10"
-                class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{ t('nav.enroll')
-                }}</router-link>
-            <router-link to="/blogs" active-class="text-neon-blue bg-white/10"
-                class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{ t('nav.blog')
-                }}</router-link>
-            <router-link to="/contact" active-class="text-neon-blue bg-white/10"
-                class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">{{ t('nav.contact')
-                }}</router-link>
+            
+            <router-link v-for="link in currentLinks" :key="link.to" :to="link.to"
+                active-class="text-neon-blue bg-white/10"
+                class="p-2 text-text-secondary hover:text-neon-blue hover:bg-white/5 rounded-lg">
+                {{ link.label.startsWith('nav.') ? t(link.label) : link.label }}
+            </router-link>
+
             <div class="h-px bg-white/10 my-2"></div>
+            
             <button @click="toggleLanguage" class="flex items-center gap-2 p-2 text-text-secondary hover:text-white">
                 <Globe class="w-4 h-4" /> {{ locale === 'en' ? 'Switch to Bengali' : 'Switch to English' }}
             </button>
@@ -138,10 +135,18 @@ onUnmounted(() => {
                 </router-link>
             </template>
             <template v-else>
-                 <router-link to="/dashboard"
-                    class="bg-linear-to-r from-neon-blue to-neon-purple text-white w-full py-3 rounded-xl font-bold text-center block shadow-[0_0_15px_#06b6d44d] flex items-center justify-center gap-2">
-                    <LayoutDashboard class="w-4 h-4" /> Dashboard
-                </router-link>
+                <div class="border-t border-white/10 pt-4 space-y-2">
+                    <p class="px-2 text-xs font-bold text-text-secondary uppercase tracking-wider">Account</p>
+                    <router-link to="/dashboard?tab=profile" class="w-full text-left p-2 flex items-center gap-3 text-text-secondary hover:bg-white/5 rounded-lg">
+                        <User class="w-4 h-4" /> My Profile
+                    </router-link>
+                    <router-link to="/dashboard?tab=settings" class="w-full text-left p-2 flex items-center gap-3 text-text-secondary hover:bg-white/5 rounded-lg">
+                        <Settings class="w-4 h-4" /> Settings
+                    </router-link>
+                    <button @click="authStore.signOut()" class="w-full text-left p-2 flex items-center gap-3 text-red-400 hover:bg-red-500/10 rounded-lg">
+                        <LogOut class="w-4 h-4" /> Sign Out
+                    </button>
+                </div>
             </template>
         </div>
     </nav>

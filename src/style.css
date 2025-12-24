@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Outfit', sans-serif;
+  --font-sans: 'Outfit', 'Noto Sans Bengali', sans-serif;
 
   /* Cyberpunk High-Tech Palette */
   --color-tech-bg: #030712;

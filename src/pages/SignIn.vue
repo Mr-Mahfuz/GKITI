@@ -15,7 +15,12 @@ const handleSignIn = async () => {
         const { error } = await authStore.signIn(email.value, password.value)
         if (error) throw error
         toast.success('Welcome back!')
-        // Redirect handled in store
+        
+        if (authStore.isAdmin) {
+            router.push('/admin')
+        } else {
+            router.push('/dashboard')
+        }
     } catch (error) {
         toast.error(error.message)
     }
